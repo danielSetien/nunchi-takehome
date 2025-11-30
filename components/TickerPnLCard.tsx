@@ -89,6 +89,35 @@ const Card = styled.div<{ $side: 'long' | 'short' }>`
     max-width: 400px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
+
+    position: relative;
+    color: var(--foreground);
+    /* font-family: 'DM Sans', sans-serif; */
+    transition: border-color 0.15s ease;
+    background: var(--surface);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        width: 300px;
+        height: 300px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -200px;
+        background: ${({ $side }) => ($side === 'long' ? `rgba(188, 216, 191, 0.603) 30%` : `rgba(214, 103, 226, 0.831)`)};
+        filter: blur(120px);
+        opacity: 0.4;
+        pointer-events: none;
+        z-index: -1;
+        border-radius: 50%;
+    }
+
+    &:hover {
+        border-color: var(--border-light);
+    }
 `;
 
 const Header = styled.div`
@@ -104,13 +133,15 @@ const Symbol = styled.h2`
     font-size: 20px;
     font-weight: 500;
     line-height: 1.4;
+
+    color: var(--text-primary);
 `;
 
 const Badge = styled.span<{ side: 'long' | 'short' }>`
     padding: 4px 12px;
     border-radius: 6px;
 
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -140,6 +171,7 @@ const Price = styled.div`
     font-weight: 500;
     font-variant-numeric: tabular-nums;
     line-height: 1.2;
+    color: var(--text-primary);
 `;
 
 const PnLGrid = styled.div`
@@ -163,9 +195,10 @@ const PnLValue = styled.div<{ positive: boolean }>`
 `;
 
 const EntryPrice = styled.div`
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     line-height: 1.4;
+    color: var(--text-secondary);
 `;
 
 const PauseButton = styled.button`
@@ -183,10 +216,25 @@ const PauseButton = styled.button`
     transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     line-height: 1.4;
 
-    background: #8b757551;
-
     &:hover {
-        background: #ffffff28;
+        background: #ffffff0f;
         border-color: var(--border-medium);
+    }
+
+    &:active {
+        transform: scale(0.99);
+    }
+
+    &:focus-visible {
+        outline: 2px solid #61f878;
+        outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+        &:hover,
+        &:active {
+            transform: none;
+        }
     }
 `;
