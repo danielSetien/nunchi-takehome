@@ -92,7 +92,7 @@ const Card = styled.div<{ $side: 'long' | 'short' }>`
 
     position: relative;
     color: var(--foreground);
-    /* font-family: 'DM Sans', sans-serif; */
+
     transition: border-color 0.15s ease;
     background: var(--surface);
     backdrop-filter: blur(8px);
@@ -210,7 +210,6 @@ const PauseButton = styled.button`
     color: var(--text-primary);
     font-size: 14px;
     font-weight: 500;
-    font-family: 'DM Sans', sans-serif;
 
     cursor: pointer;
     transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
